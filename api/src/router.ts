@@ -1,0 +1,27 @@
+import { Router } from 'express';
+import { createQuitHabit } from './useCases/quit-habit/createQuitHabit';
+import { deleteQuitHabit } from './useCases/quit-habit/deleteQuitHabit';
+import { updateQuitHabit } from './useCases/quit-habit/updateQuitHabit';
+import { listQuitHabit } from './useCases/quit-habit/listQuitHabit';
+import { createDailyTemplate } from './useCases/daily-template/createDailyTemplate';
+import { listDailyTemplate } from './useCases/daily-template/listDailyTemplate';
+import { updateDailyTemplate } from './useCases/daily-template/updateDailyTemplate';
+import { showDailyReport } from './useCases/daily-report/showDailyReport';
+import { listDailyReport } from './useCases/daily-report/listDailyReport';
+import { updateDailyReport } from './useCases/daily-report/updateDailyReport';
+import { createUser } from './useCases/users/createUser';
+import { login } from './useCases/users/login';
+
+export const router = Router();
+router.post('/quit-habits', createQuitHabit);
+router.delete('/quit-habits/:id', deleteQuitHabit);
+router.put('/quit-habits/:id', updateQuitHabit);
+router.get('/quit-habits', listQuitHabit);
+router.post('/daily-templates', createDailyTemplate);
+router.get('/daily-templates', listDailyTemplate);
+router.put('/daily-templates/:id', updateDailyTemplate);
+router.get('/daily-reports/today', showDailyReport);
+router.get('/daily-reports', listDailyReport);
+router.put('/daily-reports/:id', updateDailyReport);
+router.post('/users', createUser);
+router.post('/login', login);
