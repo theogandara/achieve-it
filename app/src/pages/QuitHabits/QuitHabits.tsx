@@ -1,7 +1,7 @@
 import { SafeArea } from '../../components/SafeArea';
 import { Text } from '../../components/Text';
 import * as S from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button/button';
 import CloseButton from '../../components/CloseButton';
 import { useNavigation } from '@react-navigation/native';
@@ -9,34 +9,37 @@ import { FlatList } from 'react-native';
 import { ModalCreateQuitHabit } from '../../components/ModalCreateQuitHabit';
 import { ModalEditQuitHabit } from '../../components/ModalEditQuitHabit';
 import { QuitHabitCard } from '../../components/QuitHabitCard';
+import { api } from '../../utils/api';
 
 export interface Habit {
-  id: number;
-  title: string;
+  _id: string;
+  name: string;
   lastTime: string;
+  icon: string;
 }
 
 export default function QuitHabits() {
-  const [data, setData] = useState<Habit[]>([
-    {
-      id: 1,
-      title: 'Example 1',
-      lastTime: '2024-09-16T14:30:00',
-    },
-    {
-      id: 2,
-      title: 'Example 1',
-      lastTime: '2024-10-5T14:30:00',
-    },
-  ]);
-
-  const navigation = useNavigation();
-
   const [modalCreateQuitHabitVisible, setModalCreateQuitHabitVisible] =
     useState(false);
 
   const [modalEditQuitHabitVisible, setModalEditQuitHabitVisible] =
     useState(false);
+  const [data, setData] = useState<Habit[]>([]);
+
+  async function loadData() {
+    try {
+      const res = await api.get('/quit-habits');
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    loadData();
+  }, [modalCreateQuitHabitVisible, modalEditQuitHabitVisible]);
+
+  const navigation = useNavigation();
 
   function handleGoBack() {
     navigation.goBack();
@@ -81,7 +84,7 @@ export default function QuitHabits() {
               <FlatList
                 data={data}
                 style={{ width: '100%', maxHeight: '100%' }}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item._id.toString()}
                 renderItem={({ item }) => (
                   <QuitHabitCard
                     habit={item}
