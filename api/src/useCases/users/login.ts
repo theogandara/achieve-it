@@ -19,7 +19,7 @@ export async function login(req: Request, res: Response) {
     }
 
     const token = jwt.sign({ email: email }, 'SECRET_KEY', {
-      expiresIn: '24h',
+      expiresIn: '1y',
     });
 
     return res.status(200).json({ token });
