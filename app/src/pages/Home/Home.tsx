@@ -11,6 +11,7 @@ import { RootStackParamList } from '../../Main';
 import ModalProfile from '../../components/ModalProfile';
 import * as SecureStore from 'expo-secure-store';
 import { api } from '../../utils/api';
+import { jwtDecode } from 'jwt-decode';
 
 type Item = {
   _id: string;
@@ -96,6 +97,13 @@ export default function Home() {
   function handleRedirect(path: 'MyProjects' | 'QuitHabits') {
     navigation.navigate(path);
   }
+  useEffect(() => {
+    const verifyToken = jwtDecode(token);
+    if (!verifyToken) {
+      SecureStore.deleteItemAsync('token');
+      navigation.navigate('Login');
+    }
+  }, [token]);
 
   return (
     <>
