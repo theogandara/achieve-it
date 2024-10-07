@@ -6,6 +6,7 @@ import * as S from './styles';
 import { useRef, useState } from 'react';
 import { Input } from '../Input';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { api } from '../../utils/api';
 
 type ModalCreateQuitHabitProps = {
   isVisible: boolean;
@@ -84,15 +85,19 @@ export function ModalCreateQuitHabit({
 
   const [date, setDate] = useState(new Date(new Date().setSeconds(0, 0)));
 
-  function handleCreateHabit() {
+  async function handleCreateHabit() {
     const habit = {
-      id: Math.random(),
-      title: isCustomHabit ? customHabit : selectedHabit?.title,
+      name: isCustomHabit ? customHabit : selectedHabit?.title,
+      icon: isCustomHabit ? emoji : selectedHabit?.emoji,
       lastTime: date.toISOString(),
     };
 
-    console.log('create habit', habit);
-    onClose();
+    try {
+      await api.post('/quit-habits', habit);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const inputTextRef = useRef<TextInput>(null);
