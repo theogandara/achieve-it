@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://achieve-it-api-achieve-it.bswnrh.easypanel.host',
 });
 
 api.interceptors.request.use(async (config) => {
