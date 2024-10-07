@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { Input } from '../Input';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Habit } from '../../pages/QuitHabits/QuitHabits';
+import { api } from '../../utils/api';
 
 type ModalEditQuitHabitProps = {
   isVisible: boolean;
@@ -25,24 +26,29 @@ export function ModalEditQuitHabit({
     onClose();
   }
 
-  const [customHabit, setCustomHabit] = useState(habit?.title || '');
+  const [customHabit, setCustomHabit] = useState(habit?.name || '');
   const [date, setDate] = useState(new Date(habit?.lastTime || Date.now()));
-  const [emoji, setEmoji] = useState('💀');
+  const [emoji, setEmoji] = useState(habit?.icon || '💀');
 
   function handleReset() {
     const newDate = new Date();
     setDate(newDate);
   }
 
-  function handleCreateHabit() {
-    const habit = {
-      id: Math.random(),
-      title: customHabit,
+  async function handleCreateHabit() {
+    const newHabit = {
+      _id: habit?._id,
+      name: customHabit,
       lastTime: date.toISOString(),
+      icon: emoji,
     };
 
-    console.log('create habit', habit);
-    onClose();
+    try {
+      await api.put(`/quit-habits/${newHabit._id}`, newHabit);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const inputTextRef = useRef<TextInput>(null);
