@@ -139,15 +139,13 @@ export default function Login() {
               secureTextEntry
             />
           </S.InputContainer>
+
+          <S.FooterContainer>
+            <Button onPress={handleLogin}>Login</Button>
+            <ButtonSecondary onPress={handleRegister}>Register</ButtonSecondary>
+          </S.FooterContainer>
         </S.Form>
       </SafeArea>
-
-      <S.Footer>
-        <S.FooterContainer>
-          <Button onPress={handleLogin}>Login</Button>
-          <ButtonSecondary onPress={handleRegister}>Register</ButtonSecondary>
-        </S.FooterContainer>
-      </S.Footer>
     </>
   );
 }

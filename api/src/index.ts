@@ -2,13 +2,15 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { router } from './router';
 
-const PORT = 3001;
+const PORT = 3000;
 
 const app = express();
 const server = app;
 
 mongoose
-  .connect('mongodb://localhost:27017')
+  .connect(
+    'mongodb://mongo:61efee0c9edc7939be31@achieve-it_db-achieve-it:27017'
+  )
   .then(() => {
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');

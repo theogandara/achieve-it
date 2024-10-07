@@ -15,11 +15,7 @@ export const InputContainer = styled.View`
   gap: 8px;
 `;
 
-export const Footer = styled.View`
-  background-color: #1e1e1e;
-  padding: 16px 24px;
-`;
-
-export const FooterContainer = styled.SafeAreaView`
+export const FooterContainer = styled.View`
+  margin-top: 24px;
   gap: 16px;
 `;
