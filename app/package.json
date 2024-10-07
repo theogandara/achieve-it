@@ -17,6 +17,7 @@
     "expo-font": "~12.0.10",
     "expo-secure-store": "~13.0.2",
     "expo-status-bar": "~1.12.1",
+    "expo-updates": "~0.25.26",
     "intl": "^1.2.5",
     "jwt-decode": "^4.0.0",
     "react": "18.2.0",
