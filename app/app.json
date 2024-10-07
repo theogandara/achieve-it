@@ -2,7 +2,7 @@
   "expo": {
     "name": "app-achieve-it",
     "slug": "app-achieve-it",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.theo.appachieveit"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +30,15 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "673ae6eb-f7e7-4ee3-9eb4-dbaf49a4cd32"
+      }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/673ae6eb-f7e7-4ee3-9eb4-dbaf49a4cd32"
+    }
   }
 }
