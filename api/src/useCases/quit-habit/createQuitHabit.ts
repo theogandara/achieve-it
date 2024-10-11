@@ -9,7 +9,6 @@ export async function createQuitHabit(req: Request, res: Response) {
       return res.status(401).json({ message: 'Authorization header missing' });
     }
     const email = getEmailFromToken(authHeader.split(' ')[1]);
-
     const { name, icon, lastTime } = req.body;
     const quitHabit = await QuitHabit.create({
       name,

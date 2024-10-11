@@ -10,7 +10,6 @@ export async function updateQuitHabit(req: Request, res: Response) {
       icon,
       lastTime,
     });
-
     if (!quitHabit) {
       return res.status(404).json({ message: 'Quit habit not found' });
     }

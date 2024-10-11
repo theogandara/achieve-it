@@ -8,9 +8,7 @@ export async function listDailyReport(req: Request, res: Response) {
     if (!authHeader) {
       return res.status(401).json({ message: 'Authorization header missing' });
     }
-
     const email = getEmailFromToken(authHeader.split(' ')[1]);
-
     const dailyReport = await DailyReport.find({
       email,
     });

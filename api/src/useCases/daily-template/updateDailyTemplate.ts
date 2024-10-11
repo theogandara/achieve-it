@@ -10,10 +10,8 @@ export async function updateDailyTemplate(req: Request, res: Response) {
       return res.status(401).json({ message: 'Authorization header missing' });
     }
     const email = getEmailFromToken(authHeader.split(' ')[1]);
-
     const { id } = req.params;
     const { items } = req.body;
-
     const dailyTemplate = await DailyTemplate.findByIdAndUpdate(id, {
       items,
     });
@@ -21,7 +19,6 @@ export async function updateDailyTemplate(req: Request, res: Response) {
     if (!dailyTemplate) {
       return res.sendStatus(404);
     }
-
     const dailyReport = await DailyReport.findOne({
       email,
       date: {

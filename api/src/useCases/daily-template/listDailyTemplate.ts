@@ -8,9 +8,7 @@ export async function listDailyTemplate(req: Request, res: Response) {
     if (!authHeader) {
       return res.status(401).json({ message: 'Authorization header missing' });
     }
-
     const email = getEmailFromToken(authHeader.split(' ')[1]);
-
     const dailyTemplates = await DailyTemplate.find({
       email,
     });
