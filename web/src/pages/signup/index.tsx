@@ -50,7 +50,7 @@ export default function SignUp() {
       <div className="input-container">
         <p className="text-small">Confirm your password</p>
         <input
-          placeholder="password"
+          placeholder="confirm password"
           type="password"
           onChange={setConfirmPassword}
         />
