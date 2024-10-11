@@ -110,7 +110,7 @@ export default function Home() {
       <SafeArea>
         <S.Profile onPress={() => setModalProfileVisible(true)}>
           <Text size={28} weight="600">
-            TG
+            AI
           </Text>
         </S.Profile>
 
