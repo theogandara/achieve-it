@@ -7,6 +7,9 @@ import { useRef, useState } from 'react';
 import { Input } from '../Input';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { api } from '../../utils/api';
+import { Platform } from 'react-native';
+
+const isAndroid = Platform.OS === 'android';
 
 type ModalCreateQuitHabitProps = {
   isVisible: boolean;
@@ -103,6 +106,15 @@ export function ModalCreateQuitHabit({
   const inputTextRef = useRef<TextInput>(null);
   const [emoji, setEmoji] = useState('💀');
 
+  const [datePickerAndroidIsOpen, setDatePickerAndroidIsOpen] = useState(false);
+  const [timePickerAndroidIsOpen, setTimePickerAndroidIsOpen] = useState(false);
+
+  function handleClickAndroid() {
+    if (!isAndroid) return;
+
+    return setDatePickerAndroidIsOpen(true);
+  }
+
   return (
     <Modal
       visible={isVisible}
@@ -119,32 +131,34 @@ export function ModalCreateQuitHabit({
           <Text size={24} weight="600" color="#fff">
             Create quit habit
           </Text>
-          <Text color="#d5d5d5" style={{ marginTop: '4px' }}>
-            What habit do you want to quit?
-          </Text>
         </S.Header>
 
         {!selectedHabit ? (
-          <FlatList
-            style={{
-              marginTop: 24,
-            }}
-            data={defaultHabits}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => (
-              <S.HabitItem onPress={() => handleSelect(item)}>
-                <Text color="#fff">{item.emoji}</Text>
-                <Text
-                  size={18}
-                  color="#fff"
-                  weight="600"
-                  style={{ marginLeft: 12 }}
-                >
-                  {item.title}
-                </Text>
-              </S.HabitItem>
-            )}
-          />
+          <>
+            <Text color="#d5d5d5" style={{ marginTop: 12 }}>
+              What habit do you want to quit?
+            </Text>
+            <FlatList
+              style={{
+                marginTop: 24,
+              }}
+              data={defaultHabits}
+              keyExtractor={(item) => String(item.id)}
+              renderItem={({ item }) => (
+                <S.HabitItem onPress={() => handleSelect(item)}>
+                  <Text color="#fff">{item.emoji}</Text>
+                  <Text
+                    size={18}
+                    color="#fff"
+                    weight="600"
+                    style={{ marginLeft: 12 }}
+                  >
+                    {item.title}
+                  </Text>
+                </S.HabitItem>
+              )}
+            />
+          </>
         ) : (
           <View
             style={{
@@ -196,7 +210,7 @@ export function ModalCreateQuitHabit({
               </View>
             )}
 
-            <Text size={20} weight="600" color="#fff" style={{ marginTop: 24 }}>
+            <Text size={20} weight="600" color="#fff">
               When was the last time you did it?
             </Text>
 
@@ -206,40 +220,86 @@ export function ModalCreateQuitHabit({
                 color="#fff"
                 weight="600"
                 style={{ marginLeft: 12 }}
+                onPress={handleClickAndroid}
               >
                 {date.toLocaleString()}
               </Text>
             </S.HabitItem>
 
-            <DateTimePicker
-              value={date}
-              mode="date"
-              textColor="#fff"
-              display="spinner"
-              style={{
-                height: 150,
-              }}
-              onChange={(_, selectedDate) => {
-                if (selectedDate) {
-                  setDate(selectedDate);
-                }
-              }}
-            />
+            {isAndroid ? (
+              <>
+                {datePickerAndroidIsOpen && (
+                  <DateTimePicker
+                    value={date}
+                    mode="date"
+                    textColor="#fff"
+                    display="spinner"
+                    style={{
+                      height: 150,
+                    }}
+                    onTouchCancel={() => setDatePickerAndroidIsOpen(false)}
+                    onChange={(_, selectedDate) => {
+                      if (selectedDate) {
+                        setDate(selectedDate);
+                        setTimePickerAndroidIsOpen(true);
+                      }
+                      setDatePickerAndroidIsOpen(false);
+                    }}
+                  />
+                )}
 
-            <DateTimePicker
-              value={date}
-              mode="time"
-              textColor="#fff"
-              display="spinner"
-              style={{
-                height: 150,
-              }}
-              onChange={(_, selectedDate) => {
-                if (selectedDate) {
-                  setDate(selectedDate);
-                }
-              }}
-            />
+                {timePickerAndroidIsOpen && (
+                  <DateTimePicker
+                    value={date}
+                    mode="time"
+                    textColor="#fff"
+                    display="spinner"
+                    style={{
+                      height: 150,
+                    }}
+                    onTouchCancel={() => setTimePickerAndroidIsOpen(false)}
+                    onChange={(_, selectedDate) => {
+                      if (selectedDate) {
+                        setDate(selectedDate);
+                      }
+                      setTimePickerAndroidIsOpen(false);
+                    }}
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  textColor="#fff"
+                  display="spinner"
+                  style={{
+                    height: 150,
+                  }}
+                  onChange={(_, selectedDate) => {
+                    if (selectedDate) {
+                      setDate(selectedDate);
+                    }
+                  }}
+                />
+
+                <DateTimePicker
+                  value={date}
+                  mode="time"
+                  textColor="#fff"
+                  display="spinner"
+                  style={{
+                    height: 150,
+                  }}
+                  onChange={(_, selectedDate) => {
+                    if (selectedDate) {
+                      setDate(selectedDate);
+                    }
+                  }}
+                />
+              </>
+            )}
           </View>
         )}
       </S.ModalBody>

@@ -40,6 +40,7 @@ export const HabitItem = styled.TouchableOpacity`
   margin-bottom: 8px;
   flex-direction: row;
   align-items: center;
+  margin-top: 12px;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -47,6 +48,10 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   border-radius: 4px;
   padding: 14px 24px;
-  width: 100%;
+  width: 50%;
   margin-top: 24px;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
 `;
