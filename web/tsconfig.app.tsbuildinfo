@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/components/modalprofile/modalprofile.tsx","./src/pages/home/index.tsx","./src/pages/login/index.tsx","./src/pages/quit-habits/index.tsx","./src/pages/signup/index.tsx","./src/utils/api.ts"],"version":"5.6.3"}
