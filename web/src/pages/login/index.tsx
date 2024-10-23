@@ -64,7 +64,8 @@ export default function Login() {
         password: password,
       });
       localStorage.setItem("token", res.data.token);
-      setMessage("Logged in successfully");
+      navigate("/");
+      return setMessage("Logged in successfully");
     } catch {
       setMessage("Invalid credentials");
     }
