@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../utils/api";
+import * as S from "./login.style";
 
 export default function Login() {
   const [email, _setEmail] = useState("");
@@ -78,20 +78,20 @@ export default function Login() {
   const disabled = !email || !password;
 
   return (
-    <div className="container">
+    <S.Container>
       <h2 className="text-large">Hello, let's get started!</h2>
 
-      <div className="input-container">
+      <S.InputContainer>
         <p className="text-small">{message}</p>
 
         <p className="text-small">Insert your email</p>
         <input placeholder="email" onChange={setEmail} />
-      </div>
+      </S.InputContainer>
 
-      <div className="input-container">
+      <S.InputContainer>
         <p className="text-small">Insert your password</p>
         <input placeholder="password" type="password" onChange={setPassword} />
-      </div>
+      </S.InputContainer>
 
       <button disabled={disabled} onClick={handleLogin}>
         Login
@@ -99,6 +99,6 @@ export default function Login() {
       <button onClick={handleClickSignUp} className="btn-tertiary">
         SignUp
       </button>
-    </div>
+    </S.Container>
   );
 }
