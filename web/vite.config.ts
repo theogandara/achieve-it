@@ -6,9 +6,9 @@ const manifestForPlugIn = {
   registerType: "prompt",
   includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
   manifest: {
-    name: "React-vite-app",
-    short_name: "react-vite-app",
-    description: "I am a simple vite app",
+    name: "AchieveIt",
+    short_name: "AchieveIt",
+    description: "AchieveIt is a simple goal tracking app.",
     icons: [
       {
         src: "/android-chrome-192x192.png",
@@ -35,7 +35,7 @@ const manifestForPlugIn = {
         purpose: "any maskable",
       },
     ],
-    theme_color: "#171717",
+    theme_color: "#1c1c1e",
     background_color: "#f0e7db",
     display: "standalone",
     scope: "/",
