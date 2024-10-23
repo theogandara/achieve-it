@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../utils/api";
-import "./home.css";
+import * as S from "./home.style";
 
 type Item = {
   _id: string;
@@ -9,7 +9,6 @@ type Item = {
 };
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
   const [token, setToken] = useState("");
   const [data, setData] = useState<Item[]>([]);
   const [reportId, setReportId] = useState("");
@@ -25,7 +24,6 @@ export default function Home() {
     if (!token) return;
     setData(newData);
     try {
-      setLoading(true);
       await api.put(
         `/daily-reports/${reportId}`,
         {
@@ -40,14 +38,12 @@ export default function Home() {
     } catch (err) {
       console.error({ err });
     } finally {
-      setLoading(false);
     }
   }
 
   async function loadData() {
     if (!token) return;
     try {
-      setLoading(true);
       const res = await api.get("daily-reports/today", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,8 +53,6 @@ export default function Home() {
       setReportId(res.data.id);
     } catch {
       setData([]);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -81,18 +75,17 @@ export default function Home() {
   }
 
   return (
-    <div className="screen">
-      {loading && <div className="loading">Loading...</div>}
-      <div className="profile">
+    <S.Screen>
+      <S.Profile>
         <button>
           <h2>AI</h2>
         </button>
-      </div>
+      </S.Profile>
 
-      <h2 className="title">Today</h2>
+      <S.Title>Today</S.Title>
 
-      <div className="card-report">
-        <header className="card-report-header">
+      <S.CardReport>
+        <S.CardReportHeader>
           <h2>
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",
@@ -100,12 +93,11 @@ export default function Home() {
               day: "numeric",
             })}
           </h2>
-        </header>
+        </S.CardReportHeader>
 
         {data.map((item: Item) => (
-          <button
+          <S.CardReportItem
             key={item._id}
-            className="card-report-item"
             onClick={() => handleCheck(item._id)}
           >
             <input
@@ -114,14 +106,14 @@ export default function Home() {
               checked={item.done}
             />
             <p>{item.name}</p>
-          </button>
+          </S.CardReportItem>
         ))}
-      </div>
+      </S.CardReport>
 
-      <div className="footer">
+      <S.Footer>
         <button className="btn-tertiary">Lists</button>
         <button className="btn-tertiary">Habits</button>
-      </div>
-    </div>
+      </S.Footer>
+    </S.Screen>
   );
 }
