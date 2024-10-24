@@ -9,7 +9,8 @@ export default function Login() {
   const [message, setMessage] = useState("");
 
   function setEmail(event: React.ChangeEvent<HTMLInputElement>) {
-    _setEmail(event.target.value);
+    const rawEmail = event.target.value.toLowerCase();
+    _setEmail(rawEmail);
   }
 
   function setPassword(event: React.ChangeEvent<HTMLInputElement>) {
@@ -85,7 +86,7 @@ export default function Login() {
         <p className="text-small">{message}</p>
 
         <p className="text-small">Insert your email</p>
-        <input placeholder="email" onChange={setEmail} />
+        <input value={email} placeholder="email" onChange={setEmail} />
       </S.InputContainer>
 
       <S.InputContainer>
