@@ -51,21 +51,6 @@ export const CardReportHeader = styled.div`
   text-align: center;
 `;
 
-export const CardReportItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  input {
-    width: 32px;
-    height: 32px;
-    border: 1px solid #0a84ff;
-    border-radius: 4px;
-    text-align: center;
-    accent-color: #0a84ff;
-  }
-`;
-
 export const Footer = styled.div`
   position: fixed;
   bottom: 0;
