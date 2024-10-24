@@ -14,7 +14,7 @@ export default function Checkbox({ id, done, onChange, name }: CheckboxProps) {
     <div>
       <S.CardReportItem key={id} onClick={() => onChange(id)}>
         {done ? <CheckboxFull /> : <CheckboxEmpty />}
-        <p>{name}</p>
+        <p className="text-medium">{name}</p>
       </S.CardReportItem>
     </div>
   );
