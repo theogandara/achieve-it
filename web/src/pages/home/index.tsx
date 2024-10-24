@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../../utils/api";
 import * as S from "./home.style";
+import Checkbox from "../../components/Checkbox/Checkbox";
 
 type Item = {
   _id: string;
@@ -37,7 +38,6 @@ export default function Home() {
       );
     } catch (err) {
       console.error({ err });
-    } finally {
     }
   }
 
@@ -96,17 +96,13 @@ export default function Home() {
         </S.CardReportHeader>
 
         {data.map((item: Item) => (
-          <S.CardReportItem
+          <Checkbox
             key={item._id}
-            onClick={() => handleCheck(item._id)}
-          >
-            <input
-              type="checkbox"
-              defaultChecked={item.done}
-              checked={item.done}
-            />
-            <p>{item.name}</p>
-          </S.CardReportItem>
+            id={item._id}
+            done={item.done}
+            name={item.name}
+            onChange={handleCheck}
+          />
         ))}
       </S.CardReport>
 
