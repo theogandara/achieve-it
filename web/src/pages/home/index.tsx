@@ -76,11 +76,11 @@ export default function Home() {
 
   return (
     <S.Screen>
-      <S.Profile>
+      {/* <S.Profile>
         <button>
           <h2>AI</h2>
         </button>
-      </S.Profile>
+      </S.Profile> */}
 
       <S.Title>Today</S.Title>
 
@@ -106,10 +106,10 @@ export default function Home() {
         ))}
       </S.CardReport>
 
-      <S.Footer>
+      {/* <S.Footer>
         <button className="btn-tertiary">Lists</button>
         <button className="btn-tertiary">Habits</button>
-      </S.Footer>
+      </S.Footer> */}
     </S.Screen>
   );
 }
