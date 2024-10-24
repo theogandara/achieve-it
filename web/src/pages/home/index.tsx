@@ -89,7 +89,7 @@ export default function Home() {
           <h2>
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",
-              month: "long",
+              month: "short",
               day: "numeric",
             })}
           </h2>
